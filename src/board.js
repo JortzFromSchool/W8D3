@@ -110,7 +110,7 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
     return piecesToFlip;
   } else {
     piecesToFlip.push([newPos[0], newPos[1]]);
-    this._positionsToFlip(newPos, color, dir, piecesToFlip);
+    piecesToFlip = this._positionsToFlip(newPos, color, dir, piecesToFlip);
     return piecesToFlip;
   }
 };
@@ -122,19 +122,15 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
  */
 Board.prototype.validMove = function (pos, color) {
   if (this.isOccupied(pos)) {
-    console.log(1)
     return false;
   };
   let result = [];
   for (let i = 0; i < Board.DIRS.length; i++) {
     result = result.concat(this._positionsToFlip(pos, color, Board.DIRS[i]));
-    console.log(result);
   }
   if (result.length === 0) {
-    console.log(3)
     return false;
   } else {
-    console.log(4)
     return true;
   }
 };
